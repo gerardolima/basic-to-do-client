@@ -3,4 +3,6 @@
  * Exports all components within its onw scope.
  */
 
-export { default as App } from './App/App';
+export { default as App } from './App';
+export { default as TaskSection } from './TaskSection';
+export { default as UserSection } from './UserSection';
