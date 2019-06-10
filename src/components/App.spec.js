@@ -1,14 +1,37 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRenderer } from 'react-test-renderer/shallow';
 import App from './App';
+import UserSection from './UserSection';
+import TaskSection from './TaskSection';
+
+const setup = propOverrides => {
+  const defaultProps = {username: undefined};
+  const props = {...defaultProps, ...propOverrides};
+
+  const renderer = createRenderer();
+  renderer.render(<App {...props} />);
+  const output = renderer.getRenderOutput();
+
+  return {
+    props: props,
+    output: output,
+    renderer: renderer
+  };
+}
 
 describe('components', () => {
   describe('App', () => {
 
-    it('sanity check - renders without crashing', () => {
-      const div = document.createElement('div');
-      ReactDOM.render(<App />, div);
-      ReactDOM.unmountComponentAtNode(div);
+    it('should render UserSection when username is undefined', () => {
+      // TODO: improve
+      const { output } = setup({username: undefined});
+      expect(output.props.children[1].type).toBe(UserSection);
+    });
+
+    it('should render TaskSection when username has value', () => {
+      // TODO: improve
+      const { output } = setup({username: 'the-username'});
+      expect(output.props.children[1].type).toBe(TaskSection);
     });
 
   });
