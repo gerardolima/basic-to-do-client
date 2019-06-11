@@ -4,5 +4,5 @@
  */
 
 export { App, ConnectedApp } from './App';
-export { default as TaskSection } from './TaskSection';
-export { default as UserSection } from './UserSection';
+export { TaskSection } from './TaskSection';
+export { UserSection, ConnectedUserSection } from './UserSection';
