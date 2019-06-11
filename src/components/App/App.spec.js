@@ -1,8 +1,8 @@
 import React from 'react';
 import { createRenderer } from 'react-test-renderer/shallow';
+import { TaskSection, UserSection } from '..';
+
 import App from './App';
-import UserSection from './UserSection';
-import TaskSection from './TaskSection';
 
 const setup = propOverrides => {
   const defaultProps = {username: undefined};

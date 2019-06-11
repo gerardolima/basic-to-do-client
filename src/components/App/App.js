@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import { UserSection, TaskSection } from '.';
+import { TaskSection, UserSection } from '..';
 
 /**
  * Application entry point
