@@ -6,3 +6,4 @@
 export { App, ConnectedApp } from './App';
 export { TaskSection } from './TaskSection';
 export { UserSection, ConnectedUserSection } from './UserSection';
+export { SignUser } from './SignUser';
