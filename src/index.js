@@ -5,16 +5,11 @@ import { Provider } from 'react-redux';
 
 import { ConnectedApp } from './components';
 import rootReducer from './reducers';
+import { sample } from './test-helpers/data-fixtures';
 
 import './index.css';
 
-const initialState = {
-  user: {username: 'any-user'},
-  tasks: [
-    { id:0, title: 'the-title-0', description: 'the-description-0', owner: 'the-owner-0' },
-    { id:1, title: 'the-title-1', description: 'the-description-1', owner: 'the-owner-1' }
-  ]
-};
+const initialState = sample;
 
 const store = createStore(rootReducer, initialState);
 
