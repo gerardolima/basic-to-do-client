@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { taskShape } from '../../models';
+import { Task } from './Task';
 
 /**
  * Renders a list of tasks
@@ -11,16 +12,10 @@ import { taskShape } from '../../models';
  */
 export const TaskList = ({ tasks }) =>
   <div className='TaskList'>
-    <ul>
-    {tasks.map(task =>
-      <li>
-        {JSON.stringify(task)}
-      </li>
-    )}
-    </ul>
-    <div>
-      ({JSON.stringify(tasks.length)}) tasks
-    </div>
+    <dl>
+      { tasks.map(task => <Task key={task._id} task={task}/>) }
+    </dl>
+    <div>({tasks.length}) tasks</div>
   </div>;
 
 TaskList.propTypes = {
