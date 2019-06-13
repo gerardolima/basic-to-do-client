@@ -1,26 +1,25 @@
 import React from 'react';
+import useDataApi from 'use-data-api';
 
-import { userShape } from '../../models';
 import { SignUser, Tasks } from '..';
 
 /**
  * Application entry point
- *
- * @param {Object} props - react props
- * @param {*} props.user
- * @param {*} props.tasks
  */
-export const App = ({ user }) =>
-  <div>
-    <header><h1>basic-task-client</h1></header>
-    { user.username
-      ? <Tasks />
-      : <SignUser />
-    }
-  </div>;
+export const App = () =>
+{
+  const [{ data: user, isLoading, isError}] = useDataApi('http://localhost:5000/api/loggedin', {username: 'nn'});
 
-App.propTypes = {
-  user: userShape,
-}
+  return (
+    <div>
+      <header><h1>basic-task-client</h1></header>
+      { user.username
+        ? <Tasks />
+        : <SignUser />
+      }
+      <div>user: {JSON.stringify({user, isLoading, isError})}</div>
+    </div>
+  );
+};
 
 export default App;
