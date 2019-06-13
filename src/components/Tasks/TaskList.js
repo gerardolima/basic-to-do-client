@@ -10,14 +10,24 @@ import { Task } from './Task';
  * @param {Object} props - react props
  * @param {Object[]} props.tasks
  */
-export const TaskList = ({ tasks }) =>
+export const TaskList = ({ tasks, onCreateTask, onEditTask, onDeleteTask}) =>
   <div className='TaskList'>
-    <dl>
-      { tasks.map(task => <Task key={task._id} task={task}/>) }
-    </dl>
+      <button name='createTask' onClick={(ev) => onCreateTask(ev)}>create a new task</button>
+    <ul>
+      { tasks.map(task => <Task
+          key={task._id}
+          task={task}
+          onEditTask={onEditTask}
+          onDeleteTask={onDeleteTask}
+        />)
+      }
+    </ul>
     <div>({tasks.length}) tasks</div>
   </div>;
 
 TaskList.propTypes = {
   tasks: PropTypes.arrayOf(taskShape).isRequired,
+  onCreateTask: PropTypes.func.isRequired,
+  onEditTask: PropTypes.func.isRequired,
+  onDeleteTask: PropTypes.func.isRequired,
 }
