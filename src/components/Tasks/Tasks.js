@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 
-import { taskShape } from '../../models';
 import { TaskList } from './TaskList';
 
 /**
- * Task CRUD
+ * Tasks section
  *
  * @param {Object} props - react props
  * @param {Object[]} props.tasks
  */
-export const Tasks = ({ tasks }) => {
+export const Tasks = () =>
+{
   const [context, setContext] = useState({mode:'list'});
 
   useEffect(() => {
    // document.title = `You clicked ${count} times`;
   });
 
-  const onCancelEdit = (ev) => { ev.preventDefault(); setContext({mode: 'list'}); }
-  const onCreateTask = (ev) => { ev.preventDefault(); setContext({mode: 'create'}); }
-  const onEditTask   = (ev, task) => { ev.preventDefault(); setContext({mode: 'edit', task}); }
-  const onDeleteTask = (ev, task) => { ev.preventDefault(); setContext({mode: 'delete', task}); }
+  const _onCancelEdit = (ev) => { ev.preventDefault(); setContext({mode: 'list'}); }
+  const _onCreateTask = (ev) => { ev.preventDefault(); setContext({mode: 'create'}); }
+  const _onEditTask   = (ev, task) => { ev.preventDefault(); setContext({mode: 'edit', task}); }
+  const _onDeleteTask = (ev, task) => {
+    if(!window.confirm('confirm deletion?')) return;
+    alert('doDeleteTask');
+  }
 
   return (
     <section className='Tasks'>
@@ -28,21 +30,17 @@ export const Tasks = ({ tasks }) => {
 
       { context.mode === 'list'
         ? <TaskList
-            tasks={tasks}
-            onCreateTask={onCreateTask}
-            onEditTask={onEditTask}
-            onDeleteTask={onDeleteTask}
+            onCreateTask={_onCreateTask}
+            onEditTask={_onEditTask}
+            onDeleteTask={_onDeleteTask}
           />
         : <div>
             TODO: edit component here <br />
-            <button name='cancelEdit' onClick={(ev) => onCancelEdit(ev)}>Cancel</button>
+            <button name='cancelEdit' onClick={(ev) => _onCancelEdit(ev) }>Cancel</button>
           </div>
       }
-      <div>{ JSON.stringify(context)}</div>
+
     </section>
   );
 }
 
-Tasks.propTypes = {
-  tasks: PropTypes.arrayOf(taskShape).isRequired
-}
