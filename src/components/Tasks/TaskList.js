@@ -11,7 +11,7 @@ import { Task } from './Task';
  */
 export const TaskList = ({ onCreateTask, onEditTask, onDeleteTask}) =>
 {
-  const [{ data, isLoading, isError}] = useDataApi('http://localhost:5000/api/tasks', []);
+  const [{ data: tasks, isLoading, isError}] = useDataApi('http://localhost:5000/api/tasks', []);
 
   return (
     <div className='TaskList'>
@@ -19,7 +19,7 @@ export const TaskList = ({ onCreateTask, onEditTask, onDeleteTask}) =>
       <ul>
         { isLoading ? <div>Loading...</div>
           : isError ? <div>An error happened</div>
-          : data.map(task => <Task
+          : tasks.map(task => <Task
               key={task._id}
               task={task}
               onEditTask={onEditTask}
@@ -27,7 +27,7 @@ export const TaskList = ({ onCreateTask, onEditTask, onDeleteTask}) =>
             />)
         }
       </ul>
-      <div>({data.length}) tasks</div>
+      <div>({tasks.length}) tasks</div>
     </div>
   );
 };
