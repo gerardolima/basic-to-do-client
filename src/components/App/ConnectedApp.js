@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import App from './App';
 
 const mapStateToProps = state => ({
-  username: state.user.username,
+  user: state.user,
   tasks: state.tasks,
 });
 

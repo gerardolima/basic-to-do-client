@@ -5,7 +5,7 @@ import { SignUser } from '..';
 import App from './App';
 
 const setup = propOverrides => {
-  const defaultProps = {username: undefined, tasks:[]};
+  const defaultProps = {user: {}, tasks:[]};
   const props = {...defaultProps, ...propOverrides};
   return shallow(<App {...props} />);
 }
@@ -20,10 +20,9 @@ describe('components', () => {
     });
 
     it('does not render SignUser if username is defined', function() {
-      const component = setup({username: 'the-username'});
+      const component = setup({user: {username: 'the-username'}});
       expect(component.find(SignUser)).toHaveLength(0);
     });
-
 
   });
 });
