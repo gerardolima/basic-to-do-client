@@ -8,6 +8,6 @@ import taskReducer from './task.reducer';
 import userReducer from './user.reducer';
 
 export default combineReducers({
-  task: taskReducer,
+  tasks: taskReducer,
   user: userReducer
 })

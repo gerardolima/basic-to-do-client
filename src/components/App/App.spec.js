@@ -1,38 +1,29 @@
 import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
-import { TaskSection, UserSection } from '..';
+import { shallow } from 'enzyme';
+import { SignUser } from '..';
 
 import App from './App';
 
 const setup = propOverrides => {
   const defaultProps = {username: undefined};
   const props = {...defaultProps, ...propOverrides};
-
-  const renderer = createRenderer();
-  renderer.render(<App {...props} />);
-  const output = renderer.getRenderOutput();
-
-  return {
-    props: props,
-    output: output,
-    renderer: renderer
-  };
+  return shallow(<App {...props} />);
 }
 
 describe('components', () => {
+
   describe('App', () => {
 
-    it('should render UserSection when username is undefined', () => {
-      // TODO: improve
-      const { output } = setup({username: undefined});
-      expect(output.props.children[1].type).toBe(UserSection);
+    it('renders SignUser if username is undefined', function() {
+      const component = setup();
+      expect(component.find(SignUser)).toHaveLength(1);
     });
 
-    it('should render TaskSection when username has value', () => {
-      // TODO: improve
-      const { output } = setup({username: 'the-username'});
-      expect(output.props.children[1].type).toBe(TaskSection);
+    it('does not render SignUser if username is defined', function() {
+      const component = setup({username: 'the-username'});
+      expect(component.find(SignUser)).toHaveLength(0);
     });
+
 
   });
 });

@@ -1,19 +1,17 @@
 import React from 'react';
 
 /**
- * Section to handle users: signup, login and logout
- *
- * @param {Object} props - react props
- * @param {string=} props.mode - signup or login
+ * form to sign an user: login or sign up
  */
-const SignUser = ({mode}) =>
-  <form>
-    <div>{mode}</div>
-    <input name='username'/>
-    <input name='password'/>
-    <button name='signup-button'>sign up</button>
-  </form>;
-
-
+const SignUser = () =>
+  <section className='SignUser'>
+    <h2>You need to be logged in to see your tasks</h2>
+    <form>
+      <input type='text' name='username'/><br/>
+      <input type='password' name='password'/><br/>
+      <button name='login'>login</button>
+      <button name='signup'>sign up!</button>
+    </form>
+  </section>;
 
 export default SignUser;

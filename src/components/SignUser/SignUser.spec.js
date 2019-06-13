@@ -1,30 +1,41 @@
 import React from 'react';
-import { createRenderer } from 'react-test-renderer/shallow';
-import UserSection from './SignUser';
+import { shallow } from 'enzyme';
+import { SignUser } from '.';
 
 const setup = propOverrides => {
-  const defaultProps = {};
+  const defaultProps = {username: undefined};
   const props = {...defaultProps, ...propOverrides};
-
-  const renderer = createRenderer()
-  renderer.render(<UserSection {...props} />)
-  const output = renderer.getRenderOutput()
-
-  return {
-    props: props,
-    output: output,
-    renderer: renderer
-  }
+  return shallow(<SignUser {...props} />);
 }
 
 describe('components', () => {
-  describe('UserPanel', () => {
 
-    it('should render a form', () => {
-      const { output } = setup()
-      // console.debug(JSON.stringify(output))
-      expect(output.type).toBe('form')
-    })
+  describe('SignUser', () => {
+
+    it('renders a form element', function() {
+      const component = setup();
+      expect(component.find('form')).toHaveLength(1);
+    });
+
+    it('renders an input element for username', function() {
+      const component = setup();
+      expect(component.find('form > input[name="username"][type="text"]')).toHaveLength(1);
+    });
+
+    it('renders an input element for password', function() {
+      const component = setup();
+      expect(component.find('form > input[name="password"][type="password"]')).toHaveLength(1);
+    });
+
+    it('renders a button for login', function() {
+      const component = setup();
+      expect(component.find('form > button[name="login"]')).toHaveLength(1);
+    });
+
+    it('renders a button for signup', function() {
+      const component = setup();
+      expect(component.find('form > button[name="signup"]')).toHaveLength(1);
+    });
 
   });
 });

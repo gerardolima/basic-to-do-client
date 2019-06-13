@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types'
-import { TaskSection, UserSection } from '..';
+import PropTypes from 'prop-types';
+import { SignUser, Tasks } from '..';
 
 /**
  * Application entry point
@@ -12,8 +12,8 @@ export const App = ({ username }) =>
   <div>
     <header><h1>basic-task-client</h1></header>
     { username
-      ? <TaskSection />
-      : <UserSection />
+      ? <Tasks tasks={[]}/>
+      : <SignUser />
     }
   </div>;
 
