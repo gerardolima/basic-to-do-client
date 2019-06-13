@@ -5,7 +5,7 @@ import { UserActions } from '../actions';
  * @param {*} state previous state
  * @param {{type:string, value:object}} action
  */
-const userReducer = (state = {}, action) => {
+const userReducer = (state = {}, action={}) => {
   switch (action.type)
   {
     case UserActions.USER_SIGNUP:

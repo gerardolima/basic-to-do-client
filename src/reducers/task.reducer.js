@@ -5,7 +5,7 @@ import {TaskActions} from '../actions';
  * @param {*} state previous state
  * @param {{type:string, value:object}} action
  */
-const taskReducer = (state = [], action) => {
+const taskReducer = (state = [], action = {}) => {
   switch (action.type)
   {
     case TaskActions.TASK_CREATE:

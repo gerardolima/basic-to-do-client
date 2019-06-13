@@ -11,7 +11,7 @@ const createMockStore = createMockStoreFactory();
  * @param {React.Component} component
  * @param {Object} props
  */
-export const withVariationsStore = (component, props = {}) => (
+export const provideStore = (component, props = {}) => (
   <Provider {...props} store={createMockStore(props)}>
     {component}
   </Provider>
