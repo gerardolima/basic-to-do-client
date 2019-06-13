@@ -3,7 +3,7 @@ import React from 'react';
 /**
  * form to sign an user: login or sign up
  */
-const SignUser = () =>
+export const SignUser = () =>
   <section className='SignUser'>
     <h2>You need to be logged in to see your tasks</h2>
     <form>
@@ -13,5 +13,3 @@ const SignUser = () =>
       <button name='signup'>sign up!</button>
     </form>
   </section>;
-
-export default SignUser;

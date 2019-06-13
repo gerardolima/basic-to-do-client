@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { SignUser } from '.';
+import { SignUser }  from './SignUser';
 
 const setup = propOverrides => {
   const defaultProps = {username: undefined};
