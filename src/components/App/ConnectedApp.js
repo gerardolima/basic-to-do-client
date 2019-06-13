@@ -3,6 +3,7 @@ import App from './App';
 
 const mapStateToProps = state => ({
   username: state.user.username,
+  tasks: state.tasks,
 });
 
 const mapDispatchToProps = dispatch => ({

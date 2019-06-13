@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import { taskShape } from '../../models';
 import { SignUser, Tasks } from '..';
 
 /**
@@ -8,17 +10,18 @@ import { SignUser, Tasks } from '..';
  * @param {Object} props - react props
  * @param {string} props.username
  */
-export const App = ({ username }) =>
+export const App = ({ username, tasks }) =>
   <div>
     <header><h1>basic-task-client</h1></header>
     { username
-      ? <Tasks tasks={[]}/>
+      ? <Tasks tasks={tasks}/>
       : <SignUser />
     }
   </div>;
 
 App.propTypes = {
-  username: PropTypes.string
+  username: PropTypes.string,
+  tasks: PropTypes.arrayOf(taskShape).isRequired,
 }
 
 export default App;

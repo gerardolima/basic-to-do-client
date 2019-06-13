@@ -5,7 +5,7 @@ import { SignUser } from '..';
 import App from './App';
 
 const setup = propOverrides => {
-  const defaultProps = {username: undefined};
+  const defaultProps = {username: undefined, tasks:[]};
   const props = {...defaultProps, ...propOverrides};
   return shallow(<App {...props} />);
 }
