@@ -8,7 +8,7 @@ import { TaskList } from './TaskList';
  * @param {Object} props - react props
  * @param {Object[]} props.tasks
  */
-export const Tasks = ({afterSignUser}) =>
+export const Tasks = ({user, afterSignUser}) =>
 {
   const [context, setContext] = useState({mode:'list'});
 
@@ -30,6 +30,7 @@ export const Tasks = ({afterSignUser}) =>
 
       { context.mode === 'list'
         ? <TaskList
+            user={user}
             onCreateTask={_onCreateTask}
             onEditTask={_onEditTask}
             onDeleteTask={_onDeleteTask}

@@ -11,7 +11,7 @@ import { Task } from './Task';
  *
  * @param {Object} props - react props
  */
-export const TaskList = ({ onCreateTask, onEditTask, onDeleteTask, afterSignUser}) =>
+export const TaskList = ({ user, onCreateTask, onEditTask, onDeleteTask, afterSignUser}) =>
 {
   const [{ data: tasks, isLoading, isError}] = useDataApi('http://localhost:5000/api/tasks', []);
 
@@ -31,11 +31,13 @@ export const TaskList = ({ onCreateTask, onEditTask, onDeleteTask, afterSignUser
       <ul>
         { isLoading ? <div>Loading...</div>
           : isError ? <div>An error happened</div>
-          : tasks.map(task => <Task
-              key={task._id}
-              task={task}
-              onEditTask={onEditTask}
-              onDeleteTask={onDeleteTask}
+          : tasks
+              .filter(task => task.owner === user._id)
+              .map(task => <Task
+                key={task._id}
+                task={task}
+                onEditTask={onEditTask}
+                onDeleteTask={onDeleteTask}
             />)
         }
       </ul>

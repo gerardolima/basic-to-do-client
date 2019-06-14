@@ -24,7 +24,7 @@ export const App = () =>
     <div>
       <header><h1>basic-task-client</h1></header>
       { user.username
-        ? <Tasks afterSignUser={afterSignUser} />
+        ? <Tasks user={user} afterSignUser={afterSignUser} />
         : <SignUser afterSignUser={afterSignUser} />
       }
       <div>user: {JSON.stringify({user, isLoading, isError})}</div>
