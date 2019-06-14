@@ -15,8 +15,8 @@ export const Task = ({ task, onEditTask, onDeleteTask }) => {
   <li className='Task'>
     <b>{title}</b><br/>
     <i>{description}</i><br/>
-    <button name='editTask' onClick={(ev) => onEditTask(ev, task)}>edit</button>
-    <button name='deleteTask' onClick={(ev) => onDeleteTask(ev, task)}>delete</button>
+    <button name='editTask' onClick={() => onEditTask(task)}>edit</button>
+    <button name='deleteTask' onClick={() => onDeleteTask(task)}>delete</button>
   </li>);
 };
 

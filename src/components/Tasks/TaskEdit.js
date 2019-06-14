@@ -29,11 +29,12 @@ export const TaskEdit = ({task, user, onExitEdit}) => {
     }
   };
 
+  const {title, description} = task || {};
   return (
     <section className='TaskEdit'>
       <fieldset>
-        <input type='text' name='title' value={task && task.title}/><br/>
-        <input type='text' name='description' value={task && task.description}/><br/>
+        <input type='text' name='title' defaultValue={title}/><br/>
+        <input type='text' name='description' defaultValue={description}/><br/>
         <button value='save' onClick={() => onSave()}>Save</button>
         <button value='cancel' onClick={() => onExitEdit(false)}>Cancel</button>
       </fieldset>
