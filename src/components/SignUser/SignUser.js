@@ -30,12 +30,12 @@ export const SignUser = ({afterSignUser}) => {
   return (
     <section className='SignUser'>
       <h2>You need to be logged in to see your tasks</h2>
-      <fieldset>
+      <div>
         <input type='text' name='username'/><br/>
-        <input type='text' name='password'/><br/>
+        <input type='password' name='password'/><br/>
         <button value='login' onClick={() => onSignUser('login')}>login</button>
         <button value='signup' onClick={() => onSignUser('signup')}>sign up!</button>
-      </fieldset>
+      </div>
     </section>
   );
 };
