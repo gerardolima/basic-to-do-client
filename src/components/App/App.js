@@ -8,7 +8,7 @@ import { SignUser, Tasks } from '..';
  */
 export const App = () =>
 {
-  const [{ data: user, isLoading, isError}, doFetch] = useDataApi('http://localhost:5000/api/loggedin', {});
+  const [{ data: user }, doFetch] = useDataApi('http://localhost:5000/api/loggedin', {});
 
   // always rely on the endpoint to check if the current user is logged in
   const afterSignUser = (action) => {
@@ -27,7 +27,6 @@ export const App = () =>
         ? <Tasks user={user} afterSignUser={afterSignUser} />
         : <SignUser afterSignUser={afterSignUser} />
       }
-      <div>user: {JSON.stringify({user, isLoading, isError})}</div>
     </div>
   );
 };

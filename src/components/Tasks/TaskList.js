@@ -11,9 +11,9 @@ import { Task } from './Task';
  *
  * @param {Object} props - react props
  */
-export const TaskList = ({ user, onCreateTask, onEditTask, onDeleteTask, afterSignUser}) =>
+export const TaskList = ({ user, onCreateTask, onEditTask, afterSignUser}) =>
 {
-  const [{ data: tasks, isLoading, isError}] = useDataApi('http://localhost:5000/api/tasks', []);
+  const [{ data: tasks, isLoading, isError}, doFetch] = useDataApi('http://localhost:5000/api/tasks', []);
 
   const onLogOut = async () =>
   {
@@ -22,6 +22,21 @@ export const TaskList = ({ user, onCreateTask, onEditTask, onDeleteTask, afterSi
 
     // the API always resolves as success
     afterSignUser('logout');
+  };
+
+  const onDeleteTask = async (task) => {
+    if(!window.confirm('confirm deletion?')) return;
+
+    const url = 'http://localhost:5000/api/tasks/delete/' + task._id;
+
+    const response = await axios.post(url, {}, {withCredentials: true});
+    if(response.data.message) {
+      // not success
+      alert(response.data.message);
+    }
+    else {
+      doFetch('http://localhost:5000/api/tasks?t=' + Date.now());
+    }
   };
 
   return (

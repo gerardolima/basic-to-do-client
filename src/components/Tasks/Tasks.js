@@ -20,10 +20,6 @@ export const Tasks = ({user, afterSignUser}) =>
   const onExitEdit = (newData) => { setContext({mode: 'list'}); }
   const onCreateTask = () => { setContext({mode: 'create'}); }
   const onEditTask   = (task) => { setContext({mode: 'edit', task}); }
-  const onDeleteTask = (task) => {
-    if(!window.confirm('confirm deletion?')) return;
-    alert('doDeleteTask');
-  }
 
   return (
     <section className='Tasks'>
@@ -34,7 +30,6 @@ export const Tasks = ({user, afterSignUser}) =>
             user={user}
             onCreateTask={onCreateTask}
             onEditTask={onEditTask}
-            onDeleteTask={onDeleteTask}
             afterSignUser={afterSignUser}
           />
         : <div>

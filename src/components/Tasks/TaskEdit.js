@@ -19,7 +19,6 @@ export const TaskEdit = ({task, user, onExitEdit}) => {
     };
 
     const response = await axios.post(url, payload, {withCredentials: true});
-    debugger
     if(response.data.message) {
       // not success
       alert(response.data.message);
