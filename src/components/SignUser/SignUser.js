@@ -6,9 +6,9 @@ import axios from 'axios';
  */
 export const SignUser = ({afterSignUser}) => {
 
-  const onSignUser = async (signMethod) =>
+  const onSignUser = async (action) =>
   {
-    const url = signMethod === 'signup'
+    const url = action === 'signup'
       ? 'http://localhost:5000/api/signup'
       : 'http://localhost:5000/api/login';
 
@@ -23,7 +23,7 @@ export const SignUser = ({afterSignUser}) => {
       alert(response.data.message);
     }
     else {
-      afterSignUser();
+      afterSignUser(action);
     }
   };
 

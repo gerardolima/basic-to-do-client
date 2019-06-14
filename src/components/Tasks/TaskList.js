@@ -15,13 +15,13 @@ export const TaskList = ({ onCreateTask, onEditTask, onDeleteTask, afterSignUser
 {
   const [{ data: tasks, isLoading, isError}] = useDataApi('http://localhost:5000/api/tasks', []);
 
-  const onLogOut = async (signMethod) =>
+  const onLogOut = async () =>
   {
     const url ='http://localhost:5000/api/logout';
     await axios.post(url, {}, {withCredentials: true});
 
     // the API always resolves as success
-    window.location.reload(false);
+    afterSignUser('logout');
   };
 
   return (
