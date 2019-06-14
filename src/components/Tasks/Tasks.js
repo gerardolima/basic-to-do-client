@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { TaskList } from './TaskList';
+import { TaskEdit } from './TaskEdit';
 
 /**
  * Tasks section
@@ -16,10 +17,10 @@ export const Tasks = ({user, afterSignUser}) =>
    // document.title = `You clicked ${count} times`;
   });
 
-  const _onCancelEdit = (ev) => { ev.preventDefault(); setContext({mode: 'list'}); }
-  const _onCreateTask = (ev) => { ev.preventDefault(); setContext({mode: 'create'}); }
-  const _onEditTask   = (ev, task) => { ev.preventDefault(); setContext({mode: 'edit', task}); }
-  const _onDeleteTask = (ev, task) => {
+  const onExitEdit = (newData) => { setContext({mode: 'list'}); }
+  const onCreateTask = () => { setContext({mode: 'create'}); }
+  const onEditTask   = (task) => { setContext({mode: 'edit', task}); }
+  const onDeleteTask = (task) => {
     if(!window.confirm('confirm deletion?')) return;
     alert('doDeleteTask');
   }
@@ -31,14 +32,17 @@ export const Tasks = ({user, afterSignUser}) =>
       { context.mode === 'list'
         ? <TaskList
             user={user}
-            onCreateTask={_onCreateTask}
-            onEditTask={_onEditTask}
-            onDeleteTask={_onDeleteTask}
+            onCreateTask={onCreateTask}
+            onEditTask={onEditTask}
+            onDeleteTask={onDeleteTask}
             afterSignUser={afterSignUser}
           />
         : <div>
-            TODO: edit component here <br />
-            <button name='cancelEdit' onClick={(ev) => _onCancelEdit(ev) }>Cancel</button>
+            <TaskEdit
+              user={user}
+              task={context.task}
+              onExitEdit={onExitEdit}
+            />
           </div>
       }
 
