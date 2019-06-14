@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+
 import useDataApi from 'use-data-api';
 
 import { Task } from './Task';
@@ -9,13 +11,23 @@ import { Task } from './Task';
  *
  * @param {Object} props - react props
  */
-export const TaskList = ({ onCreateTask, onEditTask, onDeleteTask}) =>
+export const TaskList = ({ onCreateTask, onEditTask, onDeleteTask, afterSignUser}) =>
 {
   const [{ data: tasks, isLoading, isError}] = useDataApi('http://localhost:5000/api/tasks', []);
+
+  const onLogOut = async (signMethod) =>
+  {
+    const url ='http://localhost:5000/api/logout';
+    await axios.post(url, {}, {withCredentials: true});
+
+    // the API always resolves as success
+    window.location.reload(false);
+  };
 
   return (
     <div className='TaskList'>
         <button name='createTask' onClick={(ev) => onCreateTask(ev)}>create a new task</button>
+        <button name='logout' onClick={(ev) => onLogOut()}>log out</button> <br/>
       <ul>
         { isLoading ? <div>Loading...</div>
           : isError ? <div>An error happened</div>

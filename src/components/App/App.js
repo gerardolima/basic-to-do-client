@@ -1,5 +1,5 @@
 import React from 'react';
-import useDataApi from 'use-data-api';
+import useDataApi from '../../use-data-api';
 
 import { SignUser, Tasks } from '..';
 
@@ -8,14 +8,19 @@ import { SignUser, Tasks } from '..';
  */
 export const App = () =>
 {
-  const [{ data: user, isLoading, isError}] = useDataApi('http://localhost:5000/api/loggedin', {username: 'nn'});
+  const [{ data: user, isLoading, isError}, doFetch] = useDataApi('http://localhost:5000/api/loggedin', {});
+
+  // always rely on the endpoint to check if the current user is logged in
+  const afterSignUser = () => {
+    doFetch('http://localhost:5000/api/loggedin/?t=' + Date.now());
+  }
 
   return (
     <div>
       <header><h1>basic-task-client</h1></header>
       { user.username
-        ? <Tasks />
-        : <SignUser />
+        ? <Tasks afterSignUser={afterSignUser} />
+        : <SignUser afterSignUser={afterSignUser} />
       }
       <div>user: {JSON.stringify({user, isLoading, isError})}</div>
     </div>

@@ -40,7 +40,7 @@ const useDataApi = (initialUrl, initialData) => {
       dispatch({ type: 'FETCH_INIT' });
 
       try {
-        const result = await axios(url);
+        const result = await axios(url, {withCredentials: true, headers: {'Cache-Control': 'no-cache'}});
 
         if (!didCancel) {
           dispatch({ type: 'FETCH_SUCCESS', payload: result.data });

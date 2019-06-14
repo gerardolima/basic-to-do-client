@@ -1,15 +1,41 @@
 import React from 'react';
+import axios from 'axios';
 
 /**
  * form to sign an user: login or sign up
  */
-export const SignUser = () =>
-  <section className='SignUser'>
-    <h2>You need to be logged in to see your tasks</h2>
-    <form>
-      <input type='text' name='username'/><br/>
-      <input type='password' name='password'/><br/>
-      <button name='login'>login</button>
-      <button name='signup'>sign up!</button>
-    </form>
-  </section>;
+export const SignUser = ({afterSignUser}) => {
+
+  const onSignUser = async (signMethod) =>
+  {
+    const url = signMethod === 'signup'
+      ? 'http://localhost:5000/api/signup'
+      : 'http://localhost:5000/api/login';
+
+    const payload = {
+      username: document.getElementsByName('username')[0].value,
+      password: document.getElementsByName('password')[0].value,
+    };
+    const response = await axios.post(url, payload, {withCredentials: true});
+
+    if(response.data.message) {
+      // not success
+      alert(response.data.message);
+    }
+    else {
+      afterSignUser();
+    }
+  };
+
+  return (
+    <section className='SignUser'>
+      <h2>You need to be logged in to see your tasks</h2>
+      <fieldset>
+        <input type='text' name='username'/><br/>
+        <input type='text' name='password'/><br/>
+        <button value='login' onClick={() => onSignUser('login')}>login</button>
+        <button value='signup' onClick={() => onSignUser('signup')}>sign up!</button>
+      </fieldset>
+    </section>
+  );
+};
